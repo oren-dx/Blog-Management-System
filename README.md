@@ -53,6 +53,7 @@ Blog-Project/
 ├── manage.py
 └── requirements.txt
 
+
 The authentication process follows:
 
 Registration
@@ -69,12 +70,6 @@ Blog Management
 
 Django's authentication system handles user sessions securely.
 
-📚 Blog Categories
-The application currently supports:
-1.Educational
-2.Technologies
-3.Sports
-
 🔮 Future Improvements
 🔍 Blog search functionality
 🏷️ More blog categories
@@ -87,19 +82,8 @@ The application currently supports:
 🌐 REST API using Django REST Framework
 🎯 Project Purpose
 
-This project was developed to practice and demonstrate:
 
-Django Models
-Custom User Authentication
-CRUD Operations
-Image Upload
-Django Forms
-Template Rendering
-Database Relationships
-Media File Handling
-Django Admin
 👨‍💻 Author
-
 Oren Michael Dessai
 
 Python & Django Backend Developer
