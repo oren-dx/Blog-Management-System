@@ -1,0 +1,100 @@
+{% extends 'master/base.html' %}
+
+{% block title %}
+Update Blog
+{% endblock %}
+
+
+{% block content %}
+
+<h2 class="mb-4">Update Blog</h2>
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+    <div class="mb-3">
+
+        <label class="form-label">Title</label>
+
+        <input type="text"
+               name="title"
+               class="form-control"
+               value="{{ blog_data.title }}"
+               required>
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Author Name</label>
+        <input type="text" name="author_name" class="form-control" value="{{ blog_data.author_name }}" required>
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Content</label>
+        <textarea name="content" class="form-control" rows="6" required>{{ blog_data.content }}</textarea>
+    </div>
+
+
+    <div class="mb-3">
+
+        <label class="form-label">Category</label>
+        <select name="category" class="form-select">
+
+            <option value="Educational"
+                {% if blog_data.category == 'Educational' %}
+                selected
+                {% endif %}>
+                Educational
+            </option>
+
+            <option value="Technologies"
+                {% if blog_data.category == 'Technologies' %}
+                selected
+                {% endif %}>
+                Technologies
+            </option>
+
+            <option value="Sports"
+                {% if blog_data.category == 'Sports' %}
+                selected
+                {% endif %}>
+                Sports
+            </option>
+        </select>
+
+    </div>
+
+
+    <div class="mb-3">
+
+        <label class="form-label">Current Image</label>
+        {% if blog.blog_image %}
+        <br>
+
+        <img src="{{ blog_data.blog_image.url }}" width="150" class="mb-2">
+        {% endif %}
+
+        <input type="file" name="blog_image" class="form-control">
+
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label"> Publish Date</label>
+        <input type="date"
+               name="publish_date"
+               class="form-control"
+               value="{{ blog_data.publish_date|date:'Y-m-d' }}"
+               required>
+    </div>
+
+
+    <button type="submit" class="btn btn-warning">Update Blog</button>
+    <a href="{% url 'blog_list' %}" class="btn btn-secondary">Back</a>
+
+  </form>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'master/base.html' %}
+
+{% block title %}
+{{ blog.title }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card">
+
+    {% if blog.blog_image %}
+
+    <img src="{{ blog.blog_image.url }}"
+     class="card-img-top"
+     width="300"
+     height="200"
+     style="object-fit: cover;">
+
+    {% endif %}
+
+
+    <div class="card-body">
+
+        <h2>{{ blog.title }}</h2>
+
+
+        <p class="text-muted">
+
+            By {{ blog.author_name }}| 
+            {{ blog.publish_date }}| 
+            {{ blog.category }}
+
+        </p>
+
+        <hr>
+
+        <p style="white-space: pre-line;">
+            {{ blog.content }}
+        </p>
+
+        <a href="{% url 'edit_blog' blog.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'delete_blog' blog.id %}" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
+        <a href="{% url 'blog_list' %}" class="btn btn-secondary">Back</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

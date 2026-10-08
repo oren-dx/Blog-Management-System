@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oren Michael Dessai — BBA Student &amp; Python/Django Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111823;
+    --ink-2:#161f2c;
+    --panel:#1b2532;
+    --line: rgba(240,237,228,0.10);
+    --line-strong: rgba(240,237,228,0.22);
+    --cream:#F0EDE4;
+    --cream-dim: rgba(240,237,228,0.62);
+    --cream-faint: rgba(240,237,228,0.38);
+    --teal:#3E9179;
+    --teal-bright:#57C9A6;
+    --amber:#E8A33D;
+    --radius: 3px;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--cream);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--teal); color:var(--ink);}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease;}
+    .reveal.in{opacity:1; transform:translateY(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none;}
+  }
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(17,24,35,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:var(--mono); font-size:14px; letter-spacing:0.02em;
+    display:flex; align-items:baseline; gap:6px;
+  }
+  .logo b{font-family:var(--display); font-weight:600; font-size:16px; color:var(--cream);}
+  .logo span{color:var(--teal-bright);}
+  .navlinks{display:flex; gap:28px; font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em; text-transform:uppercase;}
+  .navlinks a{text-decoration:none; color:var(--cream-dim); position:relative; padding:4px 0;}
+  .navlinks a:hover{color:var(--cream);}
+  .navlinks a:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--teal-bright); outline-offset:3px;}
+  .navlinks a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--amber);
+    transition:width .25s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--line-strong); color:var(--cream); padding:8px 10px; border-radius:var(--radius);}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:168px 0 96px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 70% 20%, black, transparent);
+    opacity:0.5;
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--teal-bright); display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:""; width:20px; height:1px; background:var(--teal-bright); display:inline-block;}
+  h1{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(38px, 6vw, 68px);
+    line-height:1.04; letter-spacing:-0.01em; margin:0 0 22px; max-width:900px;
+  }
+  h1 .accent{color:var(--amber); font-style:normal;}
+  .hero-sub{
+    font-size:17px; color:var(--cream-dim); max-width:560px; margin:0 0 36px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:56px; align-items:start; position:relative;
+  }
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.02em;
+    padding:13px 22px; border-radius:var(--radius); text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line-strong);
+    transition:border-color .2s ease, background .2s ease, transform .2s ease;
+  }
+  .btn-primary{background:var(--teal); color:var(--ink); border-color:var(--teal); font-weight:600;}
+  .btn-primary:hover{background:var(--teal-bright); transform:translateY(-1px);}
+  .btn-ghost{color:var(--cream); background:transparent;}
+  .btn-ghost:hover{border-color:var(--amber); color:var(--amber); transform:translateY(-1px);}
+
+  /* terminal / ledger signature card */
+  .console{
+    background:var(--panel); border:1px solid var(--line-strong); border-radius:6px;
+    font-family:var(--mono); font-size:13px; overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .console-bar{
+    display:flex; align-items:center; gap:8px; padding:11px 14px; border-bottom:1px solid var(--line);
+    background:rgba(240,237,228,0.03);
+  }
+  .console-dot{width:9px; height:9px; border-radius:50%; background:var(--line-strong);}
+  .console-title{margin-left:8px; color:var(--cream-faint); font-size:11.5px; letter-spacing:0.03em;}
+  .console-body{padding:18px 18px 20px;}
+  .console-line{white-space:pre; color:var(--cream-dim); margin:0 0 3px;}
+  .console-prompt{color:var(--teal-bright);}
+  .console-comment{color:var(--cream-faint);}
+  .console-str{color:var(--amber);}
+  .caret{display:inline-block; width:7px; height:14px; background:var(--teal-bright); vertical-align:-2px; animation:blink 1.1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ledger table inside console, representing BBA side */
+  .ledger{width:100%; border-collapse:collapse; margin-top:14px; font-size:12px;}
+  .ledger th, .ledger td{padding:6px 8px; border-bottom:1px dashed var(--line);}
+  .ledger th{color:var(--cream-faint); text-align:left; font-weight:500; text-transform:uppercase; letter-spacing:0.05em; font-size:10.5px;}
+  .ledger td.num{text-align:right; color:var(--teal-bright);}
+
+  /* ===== SECTION SHELLS ===== */
+  section{padding:88px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:14px;
+  }
+  h2{font-family:var(--display); font-weight:600; font-size:clamp(26px,3.4vw,36px); margin:0 0 40px; letter-spacing:-0.01em;}
+
+  /* ===== ABOUT ===== */
+  .about-grid{display:grid; grid-template-columns: 1fr 1fr; gap:56px;}
+  .about-text p{color:var(--cream-dim); font-size:15.5px; margin:0 0 16px;}
+  .stat-block{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .stat{border:1px solid var(--line); border-radius:6px; padding:20px; background:var(--panel);}
+  .stat .num{font-family:var(--display); font-size:30px; font-weight:700; color:var(--teal-bright);}
+  .stat .label{font-family:var(--mono); font-size:11.5px; color:var(--cream-faint); letter-spacing:0.03em; margin-top:4px; text-transform:uppercase;}
+
+  /* ===== SKILLS ===== */
+  .skill-cols{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .skill-col{padding:32px; }
+  .skill-col + .skill-col{border-left:1px solid var(--line);}
+  .skill-col h3{
+    font-family:var(--mono); font-size:12.5px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--cream-faint); margin:0 0 20px; display:flex; align-items:center; gap:10px;
+  }
+  .skill-col h3 .dot{width:7px; height:7px; border-radius:50%;}
+  .skill-col.biz h3 .dot{background:var(--amber);}
+  .skill-col.tech h3 .dot{background:var(--teal-bright);}
+  .taglist{display:flex; flex-wrap:wrap; gap:9px;}
+  .tag{
+    font-family:var(--mono); font-size:12.5px; padding:7px 12px; border:1px solid var(--line-strong);
+    border-radius:var(--radius); color:var(--cream-dim); background:rgba(240,237,228,0.02);
+  }
+  .skill-col.tech .tag:hover{border-color:var(--teal-bright); color:var(--teal-bright);}
+  .skill-col.biz .tag:hover{border-color:var(--amber); color:var(--amber);}
+
+  /* ===== PROJECTS ===== */
+  .proj-list{display:flex; flex-direction:column; border-top:1px solid var(--line);}
+  .proj{
+    display:grid; grid-template-columns: 90px 1fr auto; gap:28px; align-items:start;
+    padding:30px 0; border-bottom:1px solid var(--line);
+    transition:padding-left .25s ease;
+  }
+  .proj:hover{padding-left:8px;}
+  .proj-index{font-family:var(--mono); color:var(--cream-faint); font-size:13px; padding-top:4px;}
+  .proj-title{font-family:var(--display); font-size:20px; font-weight:600; margin:0 0 8px;}
+  .proj-desc{color:var(--cream-dim); font-size:14.5px; max-width:520px; margin:0 0 12px;}
+  .proj-stack{display:flex; flex-wrap:wrap; gap:8px;}
+  .proj-stack span{font-family:var(--mono); font-size:11px; color:var(--teal-bright); border:1px solid rgba(87,201,166,0.3); padding:3px 8px; border-radius:2px;}
+  .proj-link{font-family:var(--mono); font-size:12.5px; color:var(--cream-dim); text-decoration:none; white-space:nowrap; padding-top:4px; border-bottom:1px solid transparent;}
+  .proj-link:hover{color:var(--amber); border-color:var(--amber);}
+
+  /* ===== TIMELINE (education/experience) ===== */
+  .timeline{position:relative; padding-left:28px; border-left:1px solid var(--line-strong);}
+  .tl-item{position:relative; padding-bottom:38px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-33px; top:3px; width:9px; height:9px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--teal-bright);
+  }
+  .tl-meta{font-family:var(--mono); font-size:11.5px; color:var(--amber); letter-spacing:0.04em; text-transform:uppercase; margin-bottom:6px;}
+  .tl-title{font-family:var(--display); font-size:17px; font-weight:600; margin:0 0 6px;}
+  .tl-desc{color:var(--cream-dim); font-size:14.5px; max-width:600px; margin:0;}
+
+  /* ===== CONTACT ===== */
+  .contact-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
+  .contact-list{display:flex; flex-direction:column; gap:0; margin-top:28px;}
+  .contact-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 0; border-top:1px solid var(--line);
+  }
+  .contact-row:last-child{border-bottom:1px solid var(--line);}
+  .contact-label{font-family:var(--mono); font-size:11.5px; color:var(--cream-faint); text-transform:uppercase; letter-spacing:0.05em;}
+  .contact-value{font-family:var(--mono); font-size:14px; text-decoration:none; color:var(--cream);}
+  .contact-value:hover{color:var(--teal-bright);}
+  .signature-box{
+    border:1px solid var(--line-strong); border-radius:6px; padding:28px; background:var(--panel);
+    font-family:var(--mono); font-size:13px; color:var(--cream-dim);
+  }
+  .signature-box .bar{height:1px; background:linear-gradient(90deg, var(--teal-bright), var(--amber)); margin:16px 0;}
+
+  footer{padding:32px 0; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--cream-faint); margin:0;}
+
+  @media (max-width:860px){
+    .hero-grid, .about-grid, .contact-grid{grid-template-columns:1fr;}
+    .skill-cols{grid-template-columns:1fr;}
+    .skill-col + .skill-col{border-left:none; border-top:1px solid var(--line);}
+    .navlinks{display:none;}
+    .nav-toggle{display:block;}
+    .proj{grid-template-columns:40px 1fr; }
+    .proj-link{grid-column:2; margin-top:4px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><b>Oren<span>.</span>Dessai</b></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#journey">Journey</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Backend Developer &amp; BBA Student</div>
+      <h1>I build the <span class="accent">business logic</span><br/>behind the business.</h1>
+      <p class="hero-sub">Oren Michael Dessai — a Business Administration student who spends his other half in Django models, serializers, and migrations. I like systems that make sense on a spreadsheet and in a stack trace.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">View projects →</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="console reveal">
+      <div class="console-bar">
+        <span class="console-dot"></span><span class="console-dot"></span><span class="console-dot"></span>
+        <span class="console-title">manage.py shell — oren</span>
+      </div>
+      <div class="console-body">
+        <p class="console-line"><span class="console-prompt">&gt;&gt;&gt;</span> founder = Developer.objects.get(name=<span class="console-str">"Oren Michael Dessai"</span>)</p>
+        <p class="console-line"><span class="console-prompt">&gt;&gt;&gt;</span> founder.stack</p>
+        <p class="console-line"><span class="console-comment">['Python', 'Django', 'DRF', 'PostgreSQL']</span></p>
+        <p class="console-line"><span class="console-prompt">&gt;&gt;&gt;</span> founder.reads()<span class="caret"></span></p>
+        <table class="ledger">
+          <tr><th>Ledger</th><th>Entry</th><th style="text-align:right">Value</th></tr>
+          <tr><td>Debit</td><td>Django ORM hours</td><td class="num">1,240</td></tr>
+          <tr><td>Credit</td><td>Business case studies</td><td class="num">86</td></tr>
+          <tr><td>Balance</td><td>Curiosity</td><td class="num">∞</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="kicker">01 · About</div>
+      <h2>Two majors, one build process</h2>
+      <div class="about-text reveal">
+        <p>I'm currently a BBA student, which means my mornings are spent on marketing frameworks, finance ratios, and case studies — and my evenings are spent shipping Django backends. I didn't pick one over the other because I think they're the same skill wearing different clothes: both are about designing systems that hold up under real conditions.</p>
+        <p>On the technical side, I work mainly with Python and Django — building REST APIs, modelling data, and wiring up the parts of an application that don't show up in a screenshot but decide whether everything else actually works.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="stat-block">
+        <div class="stat"><div class="num">BBA</div><div class="label">Business Administration</div></div>
+        <div class="stat"><div class="num">Py/Dj</div><div class="label">Backend Development</div></div>
+        <div class="stat"><div class="num">REST</div><div class="label">API Design</div></div>
+        <div class="stat"><div class="num">SQL</div><div class="label">Data Modelling</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="kicker">02 · Skills</div>
+    <h2>What I bring to a build</h2>
+    <div class="skill-cols reveal">
+      <div class="skill-col tech">
+        <h3><span class="dot"></span>Backend Development</h3>
+        <div class="taglist">
+          <span class="tag">Python</span>
+          <span class="tag">Django</span>
+          <span class="tag">Django REST Framework</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Git &amp; GitHub</span>
+          <span class="tag">Docker (basics)</span>
+        </div>
+      </div>
+      <div class="skill-col biz">
+        <h3><span class="dot"></span>Business Foundations</h3>
+        <div class="taglist">
+          <span class="tag">Business Strategy</span>
+          <span class="tag">Financial Analysis</span>
+          <span class="tag">Marketing Principles</span>
+          <span class="tag">Operations Management</span>
+          <span class="tag">Market Research</span>
+          <span class="tag">MS Excel</span>
+          <span class="tag">Business Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="kicker">03 · Projects</div>
+    <h2>Selected work</h2>
+    <p style="color:var(--cream-faint); font-family:var(--mono); font-size:12.5px; margin-top:-24px; margin-bottom:8px;">Sample entries — swap in your own repos and links.</p>
+    <div class="proj-list reveal">
+      <div class="proj">
+        <div class="proj-index">01</div>
+        <div>
+          <h3 class="proj-title">Inventory &amp; Billing API</h3>
+          <p class="proj-desc">A Django REST Framework backend for small-business inventory tracking — stock levels, supplier records, and invoice generation with role-based access.</p>
+          <div class="proj-stack"><span>Django</span><span>DRF</span><span>PostgreSQL</span><span>JWT Auth</span></div>
+        </div>
+        <a class="proj-link" href="#">View repo →</a>
+      </div>
+      <div class="proj">
+        <div class="proj-index">02</div>
+        <div>
+          <h3 class="proj-title">Student Finance Tracker</h3>
+          <p class="proj-desc">A budgeting app built for fellow students — expense categorisation, monthly reports, and a simple dashboard, backed by a Django API.</p>
+          <div class="proj-stack"><span>Python</span><span>Django</span><span>SQLite</span><span>Chart.js</span></div>
+        </div>
+        <a class="proj-link" href="#">View repo →</a>
+      </div>
+      <div class="proj">
+        <div class="proj-index">03</div>
+        <div>
+          <h3 class="proj-title">Campus Marketplace Backend</h3>
+          <p class="proj-desc">An API powering a peer-to-peer marketplace for students — listings, messaging, and order status, designed around a normalized relational schema.</p>
+          <div class="proj-stack"><span>Django</span><span>DRF</span><span>PostgreSQL</span><span>Celery</span></div>
+        </div>
+        <a class="proj-link" href="#">View repo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="wrap">
+    <div class="kicker">04 · Journey</div>
+    <h2>Education &amp; experience</h2>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-meta">Ongoing</div>
+        <div class="tl-title">Bachelor of Business Administration (BBA)</div>
+        <p class="tl-desc">Coursework spanning finance, marketing, operations, and business strategy — building the frame I use to think about how software decisions map to business outcomes.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-meta">Self-directed</div>
+        <div class="tl-title">Python &amp; Django Backend Development</div>
+        <p class="tl-desc">Learned and applied Python and Django to build REST APIs, design database schemas, and handle authentication, permissions, and deployment basics.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-meta">In progress</div>
+        <div class="tl-title">Personal &amp; academic projects</div>
+        <p class="tl-desc">Building small, complete backend systems — from inventory tools to finance trackers — to pair business logic with working code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="kicker">05 · Contact</div>
+      <h2>Let's talk business — or backend</h2>
+      <p style="color:var(--cream-dim); max-width:480px;">Open to backend development roles, internships, and freelance Django work. Reach out below.</p>
+      <div class="contact-list">
+        <div class="contact-row"><span class="contact-label">Email</span><a class="contact-value" href="mailto:oren.dessai@example.com">oren.dessai@example.com</a></div>
+        <div class="contact-row"><span class="contact-label">GitHub</span><a class="contact-value" href="#">github.com/orendessai</a></div>
+        <div class="contact-row"><span class="contact-label">LinkedIn</span><a class="contact-value" href="#">linkedin.com/in/orendessai</a></div>
+        <div class="contact-row"><span class="contact-label">Location</span><span class="contact-value">Available for remote work</span></div>
+      </div>
+    </div>
+    <div class="signature-box reveal">
+      <div>class Developer(Person):</div>
+      <div class="bar"></div>
+      <div>&nbsp;&nbsp;name = "Oren Michael Dessai"</div>
+      <div>&nbsp;&nbsp;studies = "BBA"</div>
+      <div>&nbsp;&nbsp;builds_with = ["Python", "Django"]</div>
+      <div>&nbsp;&nbsp;status = "open_to_work"</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Oren Michael Dessai — built with Python-brained care, one migration at a time.</p>
+</footer>
+
+<script>
+  // Reveal-on-scroll for elements marked .reveal, respecting reduced-motion via CSS above.
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
